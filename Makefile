@@ -1,12 +1,12 @@
-DOCS=ra-template-v2.adoc
+DOCS=ra-template-v2
 
 all: $(DOCS) html pdf
 
 html: $(DOCS)
-	asciidoctor $(DOCS)
+	asciidoctor $(DOCS).adoc
 
 pdf: $(DOCS)
-	ruby /usr/local/bin/asciidoctor-pdf -a pdf-style=asciidoctor $(DOCS)
+	ruby /usr/local/bin/asciidoctor-pdf -a pdf-style=asciidoctor $(DOCS).adoc
 
 clean:
 	rm -f $(DOCS).html $(DOCS).pdf
