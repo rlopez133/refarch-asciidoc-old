@@ -6,3 +6,7 @@ guard 'shell' do
     Asciidoctor.convert_file(m[0], :in_place => true)
   }
 end
+
+guard 'livereload' do
+  watch(%r{^.+\.(css|js|html)$})
+end
