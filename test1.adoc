@@ -1,0 +1,59 @@
+= Guidelines and Considerations for Performance and Scaling your Red Hat Openstack 6 Cloud
+Joe Talerico <jtalerico@redhat.com>;Roger Lopez <rlopez@redhat.com>
+v1.0, 2015-06-30
+:doctype: book
+//:title-logo: images/rh-ra-banner.png
+:title-logo-image: image:images/rh-ra-banner.png[scaledwidth=70%,align=center]
+//:footer-logo: images/rh-ra-banner.png
+:header-logo: images/rh-logo.png
+// Settings:
+:compat-mode:
+:numbered:
+:specialnumbered!:
+:experimental:
+:listing-caption: Listing
+:toc:
+:icons: font
+:toclevels: 3
+ifdef::backend-pdf[]
+:pagenums:
+:pygments-style: bw
+:source-highlighter: pygments
+endif::[]
+
+[asbstract]
+//empty on purpose so that legal can be on separate page and not conflict with toc
+
+<<<
+
+100 East Davie Street + 
+Raleigh NC 27601 USA + 
+Phone: +1 919 754 3700 + 
+Phone: 888 733 4281 + 
+Fax: +1 919 754 3701 + 
+PO Box 13588 + 
+Research Triangle Park NC 27709 USA + 
+
+Linux is a registered trademark of Linus Torvalds. Red Hat, Red Hat Enterprise Linux and the Red Hat "Shadowman" logo are registered trademarks of Red Hat, Inc. in the United States and other countries.
+
+Ceph is a registered trademark of Red Hat, Inc. 
+
+UNIX is a registered trademark of The Open Group.
+
+Intel, the Intel logo and Xeon are registered trademarks of Intel Corporation or its subsidiaries in the United States and other countries.
+All other trademarks referenced herein are the property of their respective owners.
+
+© 2015 by Red Hat, Inc. This material may be distributed only subject to the terms and conditions set forth in the Open Publication License, V1.0 or later (the latest version is presently available at http://www.opencontent.org/openpub/).
+
+The information contained herein is subject to change without notice. Red Hat, Inc. shall not be liable for technical or editorial errors or omissions contained herein.
+
+Distribution of modified versions of this document is prohibited without the explicit permission of Red Hat Inc.
+
+Distribution of this work or derivative of this work in any standard (paper) book form for commercial purposes is prohibited unless prior permission is obtained from Red Hat Inc.
+
+The GPG fingerprint of the security@redhat.com key is:
+CA 20 86 86 2B D6 9D FC 65 F6 EC C4 21 91 80 CD DB 42 A6 0E
+
+Send feedback to refarch-feedback@redhat.com
+
+// vim: set syntax=asciidoc:
