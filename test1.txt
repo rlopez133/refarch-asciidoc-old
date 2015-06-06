@@ -5,7 +5,7 @@ v1.0, 2015-06-30
 //:title-logo: images/rh-ra-banner.png
 :title-logo-image: image:images/rh-ra-banner.png[scaledwidth=70%,align=center]
 //:footer-logo: images/rh-ra-banner.png
-:header-logo: images/rh-logo.png
+//:header-logo: images/rh-logo.png
 // Settings:
 :compat-mode:
 :numbered:
