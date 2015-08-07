@@ -13,7 +13,7 @@ v1.0, 2015-04-05: The first asciidoc incarnation of using RA styles and template
 
 :experimental:
 :listing-caption: Listing
-:back-cover-image: image:images/bckcover.pdf[]
+//:back-cover-image: image:images/bckcover.pdf[]
 :icons: font
 :toc:
 :toclevels: 3
