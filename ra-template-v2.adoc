@@ -3,16 +3,23 @@ Roger Lopez <rlopez@redhat.com>
 v1.0, 2015-04-05: The first asciidoc incarnation of using RA styles and template
 :description: Asciidoc of our Styles and Template Guide to replace Libre Office .ott file.
 :doctype: book
-:title-logo: images/rh-ra-banner.png
+:title-logo-image: image:images/rh-ra-banner.png[scaledwidth=70%,align=center]
 // Settings:
-:compat-mode:
+:compat-mode!:
+:autofit:
+:numbered:
+:chapter-label:
+:specialnumbered!:
+
 :experimental:
 :listing-caption: Listing
+:back-cover-image: image:images/bckcover.pdf[]
 :icons: font
 :toc:
 :toclevels: 3
 ifdef::backend-pdf[]
 :pagenums:
+:tabsize: 4
 :pygments-style: bw
 :source-highlighter: pygments
 endif::[]
@@ -102,7 +109,7 @@ $ gem update asciidoctor
 
 NOTE: Within Fedora 18 or greater, you can install asciidoctor using `yum` however, I did not chose this route as on Fedora 20 the version is 0.1.4 and the latest version is 1.5.2
 
-Once Asciidoctor gem installed successfully the asciidoctor command line interface (CLI) willb e available on your PATH. TO verify it is available, run the following command:
+Once Asciidoctor gem installed successfully the asciidoctor command line interface (CLI) willb e available on your PATH. To verify it is available, run the following command:
 
 [source,shell]
 $ asciidoctor --version
@@ -119,20 +126,185 @@ Runtime Environment (ruby 2.0.0p353 (2013-11-22 revision 43784) [i386-linux]) (l
 
 To install asciidoctor-pdf (alpha software) follow the steps below.
 
-[source]
-$ gem install --pre asciidoctor-pdf
+My preferred method to install asciidoctor-pdf is to use RVM. `RVM` allows one to have separate _workspaces_ called _gemsets_ that key each Ruby environment completely isolated from another. It also doesn't require root access. The nice part of this since asciidoctor-pdf is still alpha, it allows me to keep different versions in different workspaces making it easier to test between dev, latest alpha and alpha-1 versions.
 
-If you want syntax highlight source listings, you will want coderay and/or pygments. Install both gems.
+With a terminal window, execute the following command to setup an RVM environment. For more info on RVM, visit https://rvm.io
 
-[source]
-$ gem install coderay pygments.rb
+. Import the key of the RVM team which will be used to validate archives:
++
+[subs=+quotes]
+----
+$ *gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3*
+----
++
+. Next, install the RVM script in your home directory (resides in $HOME/.rvm):
++
+[subs=+quotes]
+----
+$ *\curl -sSL https://get.rvm.io | bash -s stable*
+----
++
+. Source your bash profile
++
+[subs=+quotes]
+----
+$ *source ~/.bash_profile*
+----
++
+. Install at least one version of Ruby, version 2.2 is the one used.
++
+[subs=+quotes]
+----
+$ *rvm install 2.2*
+----
++
+. Finally, you'll be ready to start creating gemsets (aka workspaces). Here's how you create and switch to a new gemset:
++
+[subs=+quotes]
+----
+$ *rvm use 2.2@asciidoctor-pdf-dev --create*
+----
+
+NOTE: After the gemset is created, the `--create flag` is not required. Each time you call `rvm use`, it will switch to an isolated workspace.
+
++
+. Once the development asciidoctor-pdf-dev workspace is created, git clone the repository to get the latest version.
+. Confirm the rvm workspace is using asciidoctor-pdf-dev via:
++
+
+[subs=+quotes]
+----
+$ *rvm current*
+ruby-2.2.1@asciidoctor-pdf-dev
+----
++
+. Git clone the asciidoctor-pdf-dev repository
++
+
+[subs=+quotes]
+----
+$ *git clone https://github.com/asciidoctor/asciidoctor-pdf*
+----
++
+. Install bundler using gem
++
+[subs=+quotes]
+----
+$ *gem install bundler*
+----
++
+
+. Change directory into asciidoctor-pdf-dev directory.
++
+
+[subs=+quotes]
+----
+$ *cd /path/to/asciidoctor-pdf-dev*
+----
++
+. Use `bundle` command to install dependences
++
+
+[subs=+quotes]
+----
+$ *bundle*
+----
++
+
+. Install the syntax highlight source listings.
++
+[subs=+quotes]
+----
+$ *gem install coderay*
+$ *gem install rouge*
+$ *gem install pygments.rb*
+----
++
+
+. Confirm the required gems install properly, and verify the `asciidoctor-pdf` version
++
+
+[subs=+quotes]
+----
+$ */path/to/asciidoctor-pdf/bin/asciidoctor-df -v*
+Asciidoctor PDF 1.5.0.dev using Asciidoctor 1.5.2 [http://asciidoctor.org]
+Runtime Environment (ruby 2.2.1p85 (2015-02-26 revision 49769) [x86_64-linux]) (lc:UTF-8 fs:UTF-8 in:- ex:UTF-8)
+----
++
+. This completes the steps to create and have the latest dev version of asciidoctor-pdf-dev. The next steps are to install a new workspace that has the latest alpha/beta stable release.
+
+. Once the development asciidoctor-pdf-dev workspace is created, go ahead and create the latest alpha version workspace.
+
+NOTE: Latest version at the time of this writing is alpha9
+
++
+[subs=+quotes]
+----
+$ *rvm use 2.2@asciidoctor-pdf-alpha9 --create*
+----
++
+. Confirm rvm version
++
+[subs=+quotes]
+----
+$ *rvm current*
+ruby-2.2.1@asciidoctor-pdf-alpha9
+----
++
+
+. Install asciidoctor-pdf
++
+[subs=+quotes]
+----
+$ *gem install --pre asciidoctor-pdf*
+----
++
+. Install the syntax highlight source listings.
++
+[subs=+quotes]
+----
+$ *gem install coderay*
+$ *gem install rouge*
+$ *gem install pygments.rb*
+----
 
 NOTE: If you have an issue installing _pygments.rb_, it is probably due to requiring `ruby-devel` package.
++
+. Verify install of asciidoctor-pdf-alpha via
++
 
-To convert your asciidoc to pdf, using ruby:
+[subs=+quotes]
+----
+$ *asciidoctor-pdf -v*
+Asciidoctor PDF 1.5.0.alpha.9 using Asciidoctor 1.5.2 [http://asciidoctor.org]
+Runtime Environment (ruby 2.2.1p85 (2015-02-26 revision 49769) [x86_64-linux]) (lc:UTF-8 fs:UTF-8 in:- ex:UTF-8)
+----
++
 
-[source]
-$ ruby /usr/local/bin/asciidoctor-pdf -a pdf-style=asciidoctor <name>.adoc
+=== _Convert Asciidoc to PDF_ 
+
+To convert your asciidoc to pdf, using ruby. Follow the steps below.
+
+. `cd` into the /path/to/asciidoctor-pdf/ , example below.
++
+[subs=+quotes]
+----
+$ **/HOMEDIR/.rvm/gems/ruby-2.2.1@asciidoctor-pdf-alpha9/gems/asciidoctor-pdf-1.5.0.alpha.9/data/themes**
+----
++
+. Get the latest copy of the refarch template and place it in the data/themes directory of your specified rvm workspace
++
+
+[subs=+quotes]
+----
+$ **wget https://gist.githubusercontent.com/rlopez133/dbb3c6ea88bd559cf545/raw/093ed54525c3f433feb4279af636e55da17d2142/asciidoctor-theme.yml**
+----
++
+
+[subs=+quotes]
+----
+$ **./bin/asciidoctor-pdf -a pdf-style=asciidoctor <name>.adoc**
+----
 
 This will place a <name>.pdf into your current directory. 
 
